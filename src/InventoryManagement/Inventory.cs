@@ -83,7 +83,20 @@ class Inventory{
                 Console.WriteLine($"Barcode: {item.GetBarcode()}, Name: {item.GetName()}, Quantity: {item.GetQuantity()}");
             }
         }
+ public Dictionary<string, Item> GetItems()
+        {
+            return _items;
+        }
 
+        public int GetTotalItemCount()
+        {
+            int totalCount = 0;
+            foreach (Item item in _items.Values)
+            {
+                totalCount += item.GetQuantity();
+            }
+            return totalCount;
+        }
         ~Inventory()
         {
             Console.WriteLine("Inventory destroyed.");
