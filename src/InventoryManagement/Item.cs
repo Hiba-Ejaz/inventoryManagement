@@ -1,9 +1,10 @@
 namespace src.InventoryManagement;
+
 class Item
 {
-    public Item(string barcode, string name, int quantity)
+    public Item(int quantity, string name)
     {
-        _barcode = barcode;
+        _barcode = GenerateBarcode();
         _name = name;
         if (_quantity >= 0)
         {
@@ -13,13 +14,16 @@ class Item
         {
             throw new ArgumentException("Quantity cannot be negative.");
         }
-
     }
-    private static string _barcode;
+    private int _barcode;
+    private static int _barcode_assignment = 0;
     private string _name;
     private int _quantity;
-
-    public string GetBarcode()
+    private int GenerateBarcode()
+    {
+        return _barcode_assignment += 1;
+    }
+    public int GetBarcode()
     {
         return _barcode;
     }
@@ -47,4 +51,8 @@ class Item
         }
     }
 
+    public override int GetHashCode()
+    {
+        return _barcode.GetHashCode();
+    }
 }
